@@ -20,3 +20,4 @@ target_link_libraries(TensorFramework PRIVATE ${OpenCL_LIBRARIES})
 Refer Intel® oneAPI Programming Guide for details:
 https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2024-1/overview.html 
 
+## More details will be updated soon...
