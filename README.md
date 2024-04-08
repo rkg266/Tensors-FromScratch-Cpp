@@ -20,4 +20,23 @@ target_link_libraries(TensorFramework PRIVATE ${OpenCL_LIBRARIES})
 Refer Intel® oneAPI Programming Guide for details:
 https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2024-1/overview.html 
 
+## Project File Organization
+
+├── src/
+│ ├── main.cpp - Entry point of the project.
+│ ├── opencl_setup.cpp - Select device, create context, execute OpenCL kernels.
+│ ├── Operations.cpp - Operations on Tensors defined for CPU and GPU classes separately.
+│ └── Tensor.cpp -Tensor class definitions and functionalities.
+│ 
+├── include/
+│ ├── Globals.hpp - Global variables, settings.
+│ ├── opencl_kernels.h - Kernel implementations declared as C strings.
+│ ├── opencl_setup.h - Setup functions declared.
+│ ├── Operations.hpp - CPU and GPU classes declared.
+│ ├── Tensor.hpp - Tensor and its proxy class declared.
+│ └── Testing.hpp - Full testing routines being written here.
+│
+├── CMakeLists.txt - CMake configuration.
+└── README.md - This file.
+
 ## More details will be updated soon...
