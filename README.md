@@ -27,7 +27,7 @@ https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2024-1/ove
 │ ├── opencl_setup.cpp - Select device, create context, execute OpenCL kernels. <br>
 │ ├── Operations.cpp - Operations on Tensors defined for CPU and GPU classes separately. <br>
 │ └── Tensor.cpp -Tensor class definitions and functionalities. <br>
-│ 
+│  <br>
 ├── include/ <br>
 │ ├── Globals.hpp - Global variables, settings. <br>
 │ ├── opencl_kernels.h - Kernel implementations declared as C strings. <br>
@@ -35,7 +35,7 @@ https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2024-1/ove
 │ ├── Operations.hpp - CPU and GPU classes declared. <br>
 │ ├── Tensor.hpp - Tensor and its proxy class declared. <br>
 │ └── Testing.hpp - Full testing routines being written here. <br>
-│
+│ <br>
 ├── CMakeLists.txt - CMake configuration. <br>
 └── README.md - This file. 
 
