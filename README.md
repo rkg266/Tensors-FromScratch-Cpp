@@ -1,5 +1,5 @@
 # Tensors-FromScratch-Cpp
-A C++ library for tensor operations. A personal project undertaken for applying design patterns and obtain deep insights into tensor computations using Parallel Programming with OpenCL, OpenMP.
+A C++ library for tensor operations. A personal project undertaken to apply OOPS concepts, design patterns and obtain deep insights into the tensor computations using Parallel Programming with OpenCL, OpenMP.
 
 ## Setting up OpenCL: 
 **System details:** OS - Windows 11; CPU - 12th Gen Intel(R) Core(TM) i7-12700H, GPU (integrated) - Intel(R) Iris(R) Xe Graphics
