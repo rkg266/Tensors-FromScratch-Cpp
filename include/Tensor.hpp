@@ -97,8 +97,11 @@ public:
                                 //Works for "Tensor aTensor = aTensorProxy". 
 
     // Extract the Tensor
-    Tensor getTensor() const;
+    Tensor& getTensor() const;
 
+    // Move, copy operators?
+
+    
     // Operations with TensorProxy
     Tensor operator+(const TensorAccessProxy& aTensorProxy) const; // Addition
     Tensor operator-(const TensorAccessProxy& aTensorProxy) const; // Subtraction
@@ -116,6 +119,11 @@ public:
     Tensor operator-(const dataType& aScalar) const; // Subtraction
     Tensor operator*(const dataType& aScalar) const; // Multiplication
     Tensor operator/(const dataType& aScalar) const; // Division
+
+    // Utility functions
+    void print() const; // For debugging: print tensor values
+    std::vector<int> getShape() const; // Get the shape of the tensor
+    int numel() const; // Number of elements in the tensor
 
 private:
     Tensor& tensor;

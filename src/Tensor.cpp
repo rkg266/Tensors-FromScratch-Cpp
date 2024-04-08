@@ -338,7 +338,7 @@ TensorAccessProxy::operator Tensor() const {
 
 
 // Extract the sliced-Tensor
-Tensor TensorAccessProxy::getTensor() const {
+Tensor& TensorAccessProxy::getTensor() const {
 	return this->operator Tensor(); // This is how we call custom operator
 }
 
@@ -382,6 +382,11 @@ Tensor TensorAccessProxy::operator*(const dataType& aScalar) const {
 }
 Tensor TensorAccessProxy::operator/(const dataType& aScalar) const {
 	return (this->getTensor() / Tensor({ 1, 1 }, { aScalar }));
+}
+
+// Utility functions
+void TensorAccessProxy::print() const {
+	this->operator Tensor().print();
 }
 
 

@@ -16,7 +16,7 @@ include_directories(include)
 # Add executable to the project using the specified source files
 add_executable(TensorFramework "src/main.cpp" 
 								"src/Tensor.cpp" 
-								"src/Operations.cpp"  "include/opencl_setup.h" "src/opencl_setup.cpp")
+								"src/Operations.cpp"  "include/opencl_setup.h" "src/opencl_setup.cpp"  "include/opencl_kernels.h")
 
 target_include_directories(TensorFramework PRIVATE ${OpenCL_INCLUDE_DIRS})
 target_link_libraries(TensorFramework PRIVATE ${OpenCL_LIBRARIES})

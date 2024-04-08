@@ -1,27 +1,10 @@
 #include "Operations.hpp"
-#include "opencl_setup.h"
+#include "opencl_setup.h" // OpenCL seup and execution
+#include "opencl_kernels.h" // Kernel implementations
 #include <cmath> // cmath header for std::isnan
 #include <omp.h> // OpenMP for CPU parallel programming
 
 /*********** CPUOperation *************/
-
-// Assuming the kernel source is defined somewhere
-// For the sake of simplicity, let's define it here as a global string.
-// The kernel for matrix multiplication iterates through the elements in row-major order.
-const char* matrixMultiplicationKernelSource = R"CLC(
-    __kernel void matrix_multiply(const __global float* A, const __global float* B, __global float* C, 
-                                  const int M, const int N, const int K) {
-        int row = get_global_id(0);
-        int col = get_global_id(1);
-        if(row < M && col < K) {
-            float sum = 0.0;
-            for(int i = 0; i < N; ++i) {
-                sum += A[row * N + i] * B[i * K + col];
-            }
-            C[row * K + col] = sum;
-        }
-    }
-)CLC";
 
 void CPUOperation::performOperation(const std::vector<dataType>& input1, const std::vector<dataType>& input2,
                                     std::vector<dataType>& output, OperationType opType,
@@ -39,51 +22,10 @@ void CPUOperation::Matrix2DMulitplication(std::vector<dataType>& input1, std::ve
     std::vector<dataType>& input2, std::vector<int>& shape2,
     std::vector<dataType>& output) {
 
-    // Set up OpenCL environment: context, command queue, and device are assumed to be initialized already.
-    cl_platform_id platform;
-    cl_device_id device;
-    SelectTargetDevice(&platform, &device); 
-    cl_context context = CreateOpenCLContext(&platform, &device);
-    cl_command_queue queue = CreateCommandQueue(context, &device);
+    //MatrixMultiplyKernelBased(input1, shape1, input2, shape2, output, &matrixMultNaiveKernelSource);
 
-    // Prepare data for OpenCL
-    size_t bytesA = shape1[0] * shape1[1] * sizeof(dataType);
-    size_t bytesB = shape2[0] * shape2[1] * sizeof(dataType);
-    size_t bytesC = shape1[0] * shape2[1] * sizeof(dataType);
-    output.resize(shape1[0] * shape2[1]); // Ensure output vector is correctly sized
-
-    cl_mem bufA = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, bytesA, input1.data(), NULL);
-    cl_mem bufB = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, bytesB, input2.data(), NULL);
-     cl_mem bufC = clCreateBuffer(context, CL_MEM_WRITE_ONLY, bytesC, NULL, NULL);
-
-    // Create and build the program
-    cl_program program = clCreateProgramWithSource(context, 1, &matrixMultiplicationKernelSource, NULL, NULL);
-    clBuildProgram(program, 1, &device, NULL, NULL, NULL);
-    cl_kernel kernel = clCreateKernel(program, "matrix_multiply", NULL);
-
-    // Set kernel arguments
-    clSetKernelArg(kernel, 0, sizeof(cl_mem), &bufA);
-    clSetKernelArg(kernel, 1, sizeof(cl_mem), &bufB);
-    clSetKernelArg(kernel, 2, sizeof(cl_mem), &bufC);
-    clSetKernelArg(kernel, 3, sizeof(int), &shape1[0]);
-    clSetKernelArg(kernel, 4, sizeof(int), &shape1[1]);
-    clSetKernelArg(kernel, 5, sizeof(int), &shape2[1]);
-
-    // Execute the kernel
-    size_t globalSize[2] = { shape1[0], shape2[1] };
-    clEnqueueNDRangeKernel(queue, kernel, 2, NULL, globalSize, NULL, 0, NULL, NULL);
-
-    // Read the result back into the output vector
-    clEnqueueReadBuffer(queue, bufC, CL_TRUE, 0, bytesC, output.data(), 0, NULL, NULL);
-
-    // Cleanup
-    clReleaseMemObject(bufA);
-    clReleaseMemObject(bufB);
-    clReleaseMemObject(bufC);
-    clReleaseProgram(program);
-    clReleaseKernel(kernel);
-    clReleaseCommandQueue(queue);
-    clReleaseContext(context);
+    MatrixMultiplyKernelBased(input1, shape1, input2, shape2, output, &matrixMultTilingKernelSource);
+    return;
 }
 
 /*************CPUOperation private *********************/

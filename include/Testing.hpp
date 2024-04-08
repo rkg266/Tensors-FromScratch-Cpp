@@ -126,10 +126,11 @@ public:
         std::vector<int> shape2{ 512, 256 };
         std::vector<dataType> largeVect1 = generateRandomVector<dataType>(shape1[0] * shape1[1], -25, 25);
         std::vector<dataType> largeVect2 = generateRandomVector<dataType>(shape2[0] * shape2[1], -25, 25);
-        Tensor largeTensor1({ 2, 3 }, { 1, 2, 3, 4, 5, 6 });
-        Tensor largeTensor2({ 3, 2 }, { 2, 4, 5, 6, 1, 3 });
+        Tensor largeTensor1(shape1, largeVect1);
+        Tensor largeTensor2(shape2, largeVect2);
         std::cout << "Large Matrix multiplication: Started\n";
         Tensor resultTensor1 = largeTensor1.matmul(largeTensor2);
+        resultTensor1(Slice(0, 5), Slice(0, 5)).print();
         std::cout << "Large Matrix multiplication: Done\n";
     }
 
