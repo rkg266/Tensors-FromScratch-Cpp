@@ -22,21 +22,21 @@ https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2024-1/ove
 
 ## Project File Organization
 
-├── src/
-│ ├── main.cpp - Entry point of the project.
-│ ├── opencl_setup.cpp - Select device, create context, execute OpenCL kernels.
-│ ├── Operations.cpp - Operations on Tensors defined for CPU and GPU classes separately.
-│ └── Tensor.cpp -Tensor class definitions and functionalities.
+├── src/ <br>
+│ ├── main.cpp - Entry point of the project. <br>
+│ ├── opencl_setup.cpp - Select device, create context, execute OpenCL kernels. <br>
+│ ├── Operations.cpp - Operations on Tensors defined for CPU and GPU classes separately. <br>
+│ └── Tensor.cpp -Tensor class definitions and functionalities. <br>
 │ 
-├── include/
-│ ├── Globals.hpp - Global variables, settings.
-│ ├── opencl_kernels.h - Kernel implementations declared as C strings.
-│ ├── opencl_setup.h - Setup functions declared.
-│ ├── Operations.hpp - CPU and GPU classes declared.
-│ ├── Tensor.hpp - Tensor and its proxy class declared.
-│ └── Testing.hpp - Full testing routines being written here.
+├── include/ <br>
+│ ├── Globals.hpp - Global variables, settings. <br>
+│ ├── opencl_kernels.h - Kernel implementations declared as C strings. <br>
+│ ├── opencl_setup.h - Setup functions declared. <br>
+│ ├── Operations.hpp - CPU and GPU classes declared. <br>
+│ ├── Tensor.hpp - Tensor and its proxy class declared. <br>
+│ └── Testing.hpp - Full testing routines being written here. <br>
 │
-├── CMakeLists.txt - CMake configuration.
-└── README.md - This file.
+├── CMakeLists.txt - CMake configuration. <br>
+└── README.md - This file. 
 
 ## More details will be updated soon...
