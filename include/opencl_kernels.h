@@ -1,6 +1,6 @@
 // Assuming the kernel source is defined somewhere
 // For the sake of simplicity, let's define it here as a global string.
-// The kernel for matrix multiplication iterates through the elements in row-major order.
+// The kernel for matrix multiplication iterates through the elements in col-major order.
 extern const char* matrixMultNaiveKernelSource = R"CLC(
     __kernel void matrix_multiply(const __global float* A, const __global float* B, __global float* C, 
                                   const int M, const int N, const int K) {
